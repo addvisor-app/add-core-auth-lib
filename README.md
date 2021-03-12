@@ -24,7 +24,7 @@ app.get('/addtax/test/api', function (req, res) {
         res.status(401).send({test: 'error'})
 
     }else{
-        //A library, prenche o heades token com o JWT
+        //A library, prenche o headers token com o JWT
         const userName = req.headers.token.user_name;
         res.status(200).send({test: 'success', user: userName});
     }
@@ -33,7 +33,7 @@ app.get('/addtax/test/api', function (req, res) {
 //... start express listner..
 ```
 
-É possivel proteger a sua API sem precisar implementar na sua função a logica que controla se está autenticado. Basta passar no factory as opções com o a propriedade `protected` igual a `true` (valor default é `false`), conforme exemplo abaixo:
+É possivel proteger a sua API sem precisar implementar na sua função a logica que controla se está autenticado, basta passar no factory as opções com o a propriedade `protected` igual a `true` (valor default é `false`), conforme exemplo abaixo:
 
 ```javascript
 const express = require('express');
@@ -51,7 +51,7 @@ app.get('/addtax/test/api', function (req, res) {
 //... stat express listener..
 ```
 
-> Caso sua API seja invocado sem o token JWT ou inválido, é retornado um `status code 401` sem que sua API seja invocada.
+> Caso sua API seja invocado sem o token JWT ou um JWT inválido, é retornado um `status code 401` sem que a função de sua API seja invocada.
 
 
 ## Sign In your UIs
@@ -92,7 +92,7 @@ app.use('/addtax/test/ui/', auth.signIn(), express.static('./sapui5/'));
 > É necessário informar no construtor do factory, a lista de URIs da UIs na propriedade `exclude`, afim de que o modo `protected` não rejeite a requisição (status code 401), antes que seja executado o middleware `auth.signIn()`
 
 
-## Autorize In your API
+## Autorize your API
 TBD - Será possivel validar se o usuário tem permissão para executar uma API de acordo com o scope do JWT, cnforme abaixo:
 
 ```javascript
@@ -110,7 +110,7 @@ app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']), function (req,
 //... stat express listener..
 ```
 
-# Identity Suported
+## Identity Suported
 A ibrary está preparada para interagir com os Identities Providers dos seguintes ambientes:
 
 * `sap_cf` - SAP Cloud Foundry Identity Provider.

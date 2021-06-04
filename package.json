@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "./lib/index.js",
-   
   "bin": {
     "add-core-auth-lib": "bin/auth-lib.js"
   },
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +21,8 @@
   "homepage": "https://github.com/addvisor-app/add-core-auth-lib#readme",
   "dependencies": {
     "@sap/xsenv": "^3.1.0",
+    "add-core-axios-lib": "git+https://github.com/addvisor-app/add-core-axios-lib.git",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "url": "^0.11.0"

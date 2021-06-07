@@ -21,7 +21,7 @@
   "homepage": "https://github.com/addvisor-app/add-core-auth-lib#readme",
   "dependencies": {
     "@sap/xsenv": "^3.1.0",
-    "add-core-axios-lib": "git+https://github.com/addvisor-app/add-core-axios-lib.git",
+    "add-core-axios-lib": "github:addvisor-app/add-core-axios-lib",
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",

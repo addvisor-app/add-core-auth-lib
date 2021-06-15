@@ -12,12 +12,11 @@ Permite que suas APIs só possam ser consumidas caso seja invocadas com um token
 
 ```javascript
 const express = require('express');
-const auth = require("add-core-auth-lib").factory('sap_cf');
+const auth = require("add-core-auth-lib").factory();
 
 const app = express();
-app.use(auth.authenticate()); //Library valida o JWT
 
-app.get('/addtax/test/api', function (req, res) {
+app.get('/addtax/test/api', auth.authenticate(), function (req, res) {
 
     //A library, prenche o heades isAuthenticated TRUE se tem um JWT válido
     if(!req.headers.isAuthenticated){
@@ -37,13 +36,14 @@ app.get('/addtax/test/api', function (req, res) {
 
 ```javascript
 const express = require('express');
-const auth = require("add-core-auth-lib").factory('sap_cf', {'protected':true});
+const auth = require("add-core-auth-lib").factory({'protected':true});
 
 const app = express();
-app.use(auth.authenticate()); //Library valida o JWT
 
-app.get('/addtax/test/api', function (req, res) {
-    //A library, prenche o heades token com o JWT
+app.get('/addtax/test/api', auth.authenticate(), function (req, res) {
+    //A library, spo permite entrar na unção se o JWT estiver valido,
+    //caso contrario devolve um statucode 401
+    //Caso erdadeiro, permite entrar na função e prenche o heades token com o JWT
     const userName = req.headers.token.user_name;
     res.status(200).send({test: 'success', user: userName});
 });
@@ -59,7 +59,7 @@ Permite que suas UIs solicitem a autenticação de um usuário no Identity Provi
 
 ```javascript
 const express = require('express');
-const auth = require("add-core-auth-lib").factory('sap_cf');
+const auth = require("add-core-auth-lib").factory({'protected':true});
 
 const app = express();
 
@@ -70,39 +70,17 @@ app.use('/addtax/test/ui/', auth.signIn(), express.static('./sapui5/'));
 > Toda vez que a URI for invocada, vai validar se tem um token JWT valido, caso não tenha, redireciona para o Identity Provider para autenticar o usuário e captura o JWT adicionando no cookie de sessão `x-access-token`.
 
 
-É possivel que sua aplicação tenha APIs e UIs e você possar proteger as API automaticamente, e também solicitar o logon para o Identity Provider, conforme exemplo abaixo:
-
-```javascript
-const express = require('express');
-const auth = require("add-core-auth-lib").factory('sap_cf', {'protected':true, "exclude":["/addtax/auth/ui/"]});
-
-const app = express();
-app.use(auth.authenticate()); //Library valida o JWT
-
-app.get('/addtax/test/api', function (req, res) {
-    //A library, prenche o heades token com o JWT
-    const userName = req.headers.token.user_name;
-    res.status(200).send({test: 'success', user: userName});
-});
-
-app.use('/addtax/test/ui/', auth.signIn(), express.static('./sapui5/'));
-
-//... start express listner..
-```
-> É necessário informar no construtor do factory, a lista de URIs da UIs na propriedade `exclude`, afim de que o modo `protected` não rejeite a requisição (status code 401), antes que seja executado o middleware `auth.signIn()`
-
-
 ## Autorize your API
 TBD - Será possivel validar se o usuário tem permissão para executar uma API de acordo com o scope do JWT, cnforme abaixo:
 
 ```javascript
 const express = require('express');
-const auth = require("add-core-auth-lib").factory('sap_cf', {'protected':true});
+const auth = require("add-core-auth-lib").factory({'protected':true});
 
 const app = express();
 app.use(auth.authenticate()); //Library valida o JWT
 
-app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']), function (req, res) {
+app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']).authenticate(), function (req, res) {
     const userName = req.headers.token.user_name;
     res.status(200).send({test: 'success', user: userName});
 });
@@ -111,10 +89,17 @@ app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']), function (req,
 ```
 
 ## Identity Suported
-A ibrary está preparada para interagir com os Identities Providers dos seguintes ambientes:
+A library está preparada para interagir com os Identities Providers dos seguintes ambientes:
 
 * `sap_cf` - SAP Cloud Foundry Identity Provider.
-* `add_ide` - ADD Identity Provider (Docker). TBD
+* `add_ide` - ADD Identity Provider.
+
+O Identity client é definido na variavel de ambeinte da aplicação add-core-flow-api, e server para todas as aplicações do sub-account. Para que a library seja capaz de alcançar essas variáveis, é necessário definir a variavel de ambiente local com a URL da aplicação core pelo no arquivo manifest, da seguinte forma:
+
+```javascript
+ env:
+    ADD_GLOBAL_VARIABLE_URL: 'https://add-core-flow-api-((subaccount)).((domain))/add/flow/runtime/variables'
+```
 
 ## License
 

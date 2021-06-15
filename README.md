@@ -94,7 +94,7 @@ A library está preparada para interagir com os Identities Providers dos seguint
 * `sap_cf` - SAP Cloud Foundry Identity Provider.
 * `add_ide` - ADD Identity Provider.
 
-O Identity client é definido na variavel de ambeinte da aplicação add-core-flow-api, e server para todas as aplicações do sub-account. Para que a library seja capaz de alcançar essas variáveis, é necessário definir a variavel de ambiente local com a URL da aplicação core pelo no arquivo manifest, da seguinte forma:
+O Identity client é definido na variavel de ambeinte `ADD_IDENTITY_CLIENT` da aplicação `add-core-flow-api`, e server para todas as aplicações do sub-account. Para que a library importada no seu projeto seja capaz de alcançar essa variável, é necessário definir uma variável de ambiente no projeto local com a URL da aplicação `add-core-flow-api` no seu arquivo manifest, da seguinte forma:
 
 ```javascript
  env:

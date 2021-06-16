@@ -104,6 +104,15 @@ app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']).authenticate(),
 //... stat express listener..
 ```
 
+## Factory Properties
+
+As seguintes propriedades são aceitas no contrutor da library:
+
+* `client` - Essa propriedade define o client do Identity Provider, porem não é recomendado passar pelo contrututor, visto que a library busca essa proriedade na variavel de ambeinte `ADD_IDENTITY_CLIENT` da aplicação `add-core-flow-api`, e server para todas as aplicações do sub-account e independente do ambiente de depoy do microservice.
+* `debug` - Essa proriedade define se os log da Library serão exibidos no microservice, porem nã é recomendado passar como paramentro, mas parametrizar como variavel de ambiente `ADD_AUTH_DEBUG`(boolean, o default é false).
+* `protected` - Essa propriedade define se o middleware `authenticate` vai barrar a implementação da função da API. Caso a requisição não tenha o JWT, o modo protected igual a `false` (default) e permite executar a função indicando no headers que não esta autenticado, ja como `true`, não deixa executar a função devolvendo o status code 401.
+
+
 ## License
 
 ADD Cloud - Addvisor

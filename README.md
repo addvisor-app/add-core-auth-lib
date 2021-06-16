@@ -32,7 +32,7 @@ const auth = require("add-core-auth-lib").factory();
 
 const app = express();
 
-app.get('/addtax/test/api', auth.authenticate(), function (req, res) {
+app.get('/addtax/test/api', auth.authenticate, function (req, res) {
 
     //A library, prenche o heades isAuthenticated TRUE se tem um JWT válido
     if(!req.headers.isAuthenticated){
@@ -56,7 +56,7 @@ const auth = require("add-core-auth-lib").factory({'protected':true});
 
 const app = express();
 
-app.get('/addtax/test/api', auth.authenticate(), function (req, res) {
+app.get('/addtax/test/api', auth.authenticate, function (req, res) {
     //A library, spo permite entrar na unção se o JWT estiver valido:
     //Caso contrario devolve um statucode 401 não permitindo entrar na função;
     //Caso verdadeiro, permite entrar na função e prenche o heades token com o JWT;
@@ -79,7 +79,7 @@ const auth = require("add-core-auth-lib").factory({'protected':true});
 
 const app = express();
 
-app.use('/addtax/test/ui/', auth.signIn(), express.static('./sapui5/'));
+app.use('/addtax/test/ui/', auth.signIn, express.static('./sapui5/'));
 
 //... start express listner..
 ```
@@ -96,7 +96,7 @@ const auth = require("add-core-auth-lib").factory({'protected':true});
 
 const app = express();
 
-app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']).authenticate(), function (req, res) {
+app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']).authenticate, function (req, res) {
     const userName = req.headers.token.user_name;
     res.status(200).send({test: 'success', user: userName});
 });

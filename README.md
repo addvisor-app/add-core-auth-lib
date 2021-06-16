@@ -7,6 +7,19 @@ Install
 `npm install https://github.com/addvisor-app/add-core-auth-lib --save`
 
 
+## Identity Suported
+A library está preparada para interagir com clients dos Identities Providers dos seguintes ambientes:
+
+* `sap_cf` - SAP Cloud Foundry Identity Provider.
+* `add_ide` - ADD Identity Provider.
+
+O tipo do client definido na variavel de ambeinte `ADD_IDENTITY_CLIENT` da aplicação `add-core-flow-api`, e server para todas as aplicações do sub-account. Para que a library importada no seu projeto seja capaz de alcançar essa variável, é necessário definir uma variável de ambiente no projeto local com a URL da aplicação `add-core-flow-api` no seu arquivo manifest, da seguinte forma:
+
+```javascript
+ env:
+    ADD_GLOBAL_VARIABLE_URL: 'https://add-core-flow-api-((subaccount)).((domain))/add/flow/runtime/variables'
+```
+
 ## Protect your API
 Permite que suas APIs só possam ser consumidas caso seja invocadas com um token JWT valido, conforme exemplo abaixo:
 
@@ -85,19 +98,6 @@ app.get('/addtax/test/api', auth.autorize(['ROLE_1', 'ROLES_2']).authenticate(),
 });
 
 //... stat express listener..
-```
-
-## Identity Suported
-A library está preparada para interagir com os Identities Providers dos seguintes ambientes:
-
-* `sap_cf` - SAP Cloud Foundry Identity Provider.
-* `add_ide` - ADD Identity Provider.
-
-O Identity client é definido na variavel de ambeinte `ADD_IDENTITY_CLIENT` da aplicação `add-core-flow-api`, e server para todas as aplicações do sub-account. Para que a library importada no seu projeto seja capaz de alcançar essa variável, é necessário definir uma variável de ambiente no projeto local com a URL da aplicação `add-core-flow-api` no seu arquivo manifest, da seguinte forma:
-
-```javascript
- env:
-    ADD_GLOBAL_VARIABLE_URL: 'https://add-core-flow-api-((subaccount)).((domain))/add/flow/runtime/variables'
 ```
 
 ## License

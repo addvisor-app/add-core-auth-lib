@@ -1,13 +1,15 @@
 # add-core-auth-lib
+
 add-core-auth-lib é uma library do pacote ADD Core, que permite aplicações node-js que abstrai autenticação. Tem como objetivo protejer um API com ua autenticação do tipo JWT válida, solicitar a autenticação do tipo JWT para um Identity Provider para uma UI, ou validar a autorização de um usuário de acordo com o escopode um JWT válido.
 
 ## Use
+
 Install
 
 `npm install https://github.com/addvisor-app/add-core-auth-lib --save`
 
-
 ## Identity Suported
+
 A library está preparada para interagir com clients dos Identities Providers dos seguintes ambientes:
 
 * `sap_cf` - SAP Cloud Foundry Identity Provider.
@@ -21,6 +23,7 @@ O tipo do client definido na variavel de ambeinte `ADD_IDENTITY_CLIENT` da aplic
 ```
 
 ## Protect your API
+
 Permite que suas APIs só possam ser consumidas caso seja invocadas com um token JWT valido, conforme exemplo abaixo:
 
 ```javascript
@@ -66,8 +69,8 @@ app.get('/addtax/test/api', auth.authenticate(), function (req, res) {
 
 > Caso sua API seja invocado sem o token JWT ou um JWT inválido, é retornado um `status code 401` sem que a função de sua API seja invocada.
 
-
 ## Sign In your UIs
+
 Permite que suas UIs solicitem a autenticação de um usuário no Identity Provider do ambiente onde está hospedado a aplicação, conforme exemplo abaixo:
 
 ```javascript
@@ -80,10 +83,11 @@ app.use('/addtax/test/ui/', auth.signIn(), express.static('./sapui5/'));
 
 //... start express listner..
 ```
+
 > Toda vez que a URI for invocada, vai validar se tem um token JWT valido, caso não tenha, redireciona para o Identity Provider para autenticar o usuário e captura o JWT adicionando no cookie de sessão `x-access-token`.
 
-
 ## Autorize your API
+
 TBD - Será possivel validar se o usuário tem permissão para executar uma API de acordo com o scope do JWT, cnforme abaixo:
 
 ```javascript

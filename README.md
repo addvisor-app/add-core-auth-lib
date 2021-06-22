@@ -120,7 +120,7 @@ Segue abaixo o diagrama de sequencia das interações da library para os metodos
 
 ### signin
 
-![alt text](https://github.com/addvisor-app/add-core-auth-lib/blob/master/lib/img/sequence add-core-auh-lib- signin.png "Sequence Diagram SignIn")
+![alt text](https://github.com/addvisor-app/add-core-auth-lib/blob/master/lib/img/diagram_signin.png "Sequence Diagram SignIn")
 ## License
 
 ADD Cloud - Addvisor

@@ -116,11 +116,14 @@ As seguintes propriedades são aceitas no contrutor da library:
 
 Segue abaixo o diagrama de sequencia das interações da library para os metodos `authenticate` e `signin`
 
-### authenticate
+### Authenticate
 
-### signin
+![alt text](https://github.com/addvisor-app/add-core-auth-lib/blob/master/lib/img/diagram_authenticated.png "Sequence Diagram Authenticate")
+
+### SignIn
 
 ![alt text](https://github.com/addvisor-app/add-core-auth-lib/blob/master/lib/img/diagram_signin.png "Sequence Diagram SignIn")
+
 ## License
 
 ADD Cloud - Addvisor

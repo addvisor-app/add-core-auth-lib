@@ -112,7 +112,15 @@ As seguintes propriedades são aceitas no contrutor da library:
 * `debug` - Essa proriedade define se os log da Library serão exibidos no microservice, porem nã é recomendado passar como paramentro, mas parametrizar como variavel de ambiente `ADD_AUTH_DEBUG`(boolean, o default é false).
 * `protected` - Essa propriedade define se o middleware `authenticate` vai barrar a implementação da função da API. Caso a requisição não tenha o JWT, o modo protected igual a `false` (default) e permite executar a função indicando no headers que não esta autenticado, ja como `true`, não deixa executar a função devolvendo o status code 401.
 
+## Architecture
 
+Segue abaixo o diagrama de sequencia das interações da library para os metodos `authenticate` e `signin`
+
+### authenticate
+
+### signin
+
+![alt text](https://github.com/addvisor-app/add-core-auth-lib/blob/master/lib/img/sequence add-core-auh-lib- signin.png "Sequence Diagram SignIn")
 ## License
 
 ADD Cloud - Addvisor
